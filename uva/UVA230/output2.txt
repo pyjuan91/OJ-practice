@@ -1,0 +1,134 @@
+Put "Frankenstein" after "Turbo C/C++"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "Platero y yo" after "El Quijote"
+Put "Ingenieria del software" after "La tabla de Flandes"
+Put "Otelo" after "Turbo C/C++"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+Put "Algoritmica" first
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "El Quijote"
+END
+Put "It" first
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "La ciudad de la alegria"
+END
+Put "El alcalde de Zalamea" first
+Put "Ingenieria del software" after "El alcalde de Zalamea"
+END
+Put "Platero y yo" after "El alcalde de Zalamea"
+Put "La tabla de Flandes" after "Platero y yo"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "Ingenieria del software"
+Put "Frankenstein" after "Turbo C/C++"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+Put "It" after "Platero y yo"
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "Turbo C/C++"
+END
+Put "Frankenstein" after "Turbo C/C++"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "Platero y yo" after "El Quijote"
+Put "Ingenieria del software" after "La tabla de Flandes"
+Put "Otelo" after "Turbo C/C++"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+Put "Algoritmica" first
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "El Quijote"
+END
+Put "It" first
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "La ciudad de la alegria"
+END
+Put "El alcalde de Zalamea" first
+Put "Ingenieria del software" after "El alcalde de Zalamea"
+END
+Put "Platero y yo" after "El alcalde de Zalamea"
+Put "La tabla de Flandes" after "Platero y yo"
+END
+Put "Frankenstein" after "Ingenieria del software"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "Ingenieria del software"
+END
+Put "It" after "Platero y yo"
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "Turbo C/C++"
+END
+Put "Frankenstein" after "Turbo C/C++"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "Platero y yo" after "El Quijote"
+Put "Ingenieria del software" after "La tabla de Flandes"
+Put "Otelo" after "Turbo C/C++"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+END
+Put "Algoritmica" first
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "El Quijote"
+END
+Put "It" first
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "La ciudad de la alegria"
+END
+Put "El alcalde de Zalamea" first
+Put "Ingenieria del software" after "El alcalde de Zalamea"
+END
+Put "Platero y yo" after "El alcalde de Zalamea"
+Put "La tabla de Flandes" after "Platero y yo"
+END
+Put "Frankenstein" after "Ingenieria del software"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "Ingenieria del software"
+END
+Put "It" after "Platero y yo"
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "Turbo C/C++"
+END
+Put "Frankenstein" after "Turbo C/C++"
+END
+Put "Platero y yo" after "El Quijote"
+Put "Otelo" after "Turbo C/C++"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "Ingenieria del software" after "La tabla de Flandes"
+END
+END
+Put "Algoritmica" first
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "El Quijote"
+END
+Put "It" first
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "La ciudad de la alegria"
+END
+Put "El alcalde de Zalamea" first
+Put "Ingenieria del software" after "El alcalde de Zalamea"
+END
+Put "Platero y yo" after "El alcalde de Zalamea"
+Put "La tabla de Flandes" after "Platero y yo"
+END
+Put "Algoritmica" after "El alcalde de Zalamea"
+Put "Frankenstein" after "Ingenieria del software"
+Put "Programacion en Pascal" after "Frankenstein"
+END
+Put "El Quijote" after "Algoritmica"
+Put "Turbo C/C++" after "Ingenieria del software"
+END
+Put "It" after "Platero y yo"
+Put "La ciudad de la alegria" after "It"
+Put "Otelo" after "Turbo C/C++"
+END

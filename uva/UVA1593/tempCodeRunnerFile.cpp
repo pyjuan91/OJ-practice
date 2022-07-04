@@ -1,0 +1,1 @@
+ifstream cin("input.txt");

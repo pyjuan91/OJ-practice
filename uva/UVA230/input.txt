@@ -1,0 +1,244 @@
+"Algoritmica" by Brassard
+"El Quijote" by Cervantes M.
+"Turbo C/C++" by Schildt H.
+"La ciudad de la alegria" by Lapierre D.
+"It" by King S.
+"Otelo" by Shakespeare W.
+"Ingenieria del software" by Pressman R.
+"El alcalde de Zalamea" by Barca C.
+"Platero y yo" by Jimenez J.
+"La tabla de Flandes" by Perez-Reverte A.
+"Frankenstein" by Shelly M.
+"Programacion en Pascal" by Wirth N.
+END
+BORROW "Frankenstein"
+BORROW "Ingenieria del software"
+BORROW "Otelo"
+RETURN "Frankenstein"
+BORROW "Platero y yo"
+BORROW "Programacion en Pascal"
+SHELVE
+BORROW "Algoritmica"
+RETURN "Otelo"
+RETURN "Programacion en Pascal"
+RETURN "Platero y yo"
+RETURN "Algoritmica"
+RETURN "Ingenieria del software"
+SHELVE
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+BORROW "Ingenieria del software"
+BORROW "El alcalde de Zalamea"
+BORROW "Platero y yo"
+BORROW "La tabla de Flandes"
+BORROW "Frankenstein"
+BORROW "Programacion en Pascal"
+RETURN "Algoritmica"
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+SHELVE
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+RETURN "Ingenieria del software"
+RETURN "El alcalde de Zalamea"
+SHELVE
+RETURN "Platero y yo"
+RETURN "La tabla de Flandes"
+SHELVE
+RETURN "Frankenstein"
+RETURN "Programacion en Pascal"
+RETURN "Algoritmica"
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+SHELVE
+BORROW "Frankenstein"
+BORROW "Ingenieria del software"
+BORROW "Otelo"
+RETURN "Frankenstein"
+BORROW "Platero y yo"
+BORROW "Programacion en Pascal"
+SHELVE
+BORROW "Algoritmica"
+RETURN "Otelo"
+RETURN "Programacion en Pascal"
+RETURN "Platero y yo"
+RETURN "Algoritmica"
+RETURN "Ingenieria del software"
+SHELVE
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+BORROW "Ingenieria del software"
+BORROW "El alcalde de Zalamea"
+BORROW "Platero y yo"
+BORROW "La tabla de Flandes"
+BORROW "Frankenstein"
+BORROW "Programacion en Pascal"
+RETURN "Algoritmica"
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+SHELVE
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+RETURN "Ingenieria del software"
+RETURN "El alcalde de Zalamea"
+SHELVE
+RETURN "Platero y yo"
+RETURN "La tabla de Flandes"
+SHELVE
+RETURN "Frankenstein"
+RETURN "Programacion en Pascal"
+SHELVE
+RETURN "Algoritmica"
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+SHELVE
+BORROW "Frankenstein"
+BORROW "Ingenieria del software"
+BORROW "Otelo"
+RETURN "Frankenstein"
+BORROW "Platero y yo"
+BORROW "Programacion en Pascal"
+SHELVE
+BORROW "Algoritmica"
+RETURN "Otelo"
+RETURN "Programacion en Pascal"
+RETURN "Platero y yo"
+RETURN "Algoritmica"
+RETURN "Ingenieria del software"
+SHELVE
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+BORROW "Ingenieria del software"
+BORROW "El alcalde de Zalamea"
+BORROW "Platero y yo"
+SHELVE
+BORROW "La tabla de Flandes"
+BORROW "Frankenstein"
+BORROW "Programacion en Pascal"
+RETURN "Algoritmica"
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+SHELVE
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+RETURN "Ingenieria del software"
+RETURN "El alcalde de Zalamea"
+SHELVE
+RETURN "Platero y yo"
+RETURN "La tabla de Flandes"
+SHELVE
+RETURN "Frankenstein"
+RETURN "Programacion en Pascal"
+SHELVE
+RETURN "Algoritmica"
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+SHELVE
+BORROW "Frankenstein"
+BORROW "Ingenieria del software"
+BORROW "Otelo"
+RETURN "Frankenstein"
+BORROW "Platero y yo"
+BORROW "Programacion en Pascal"
+SHELVE
+BORROW "Algoritmica"
+RETURN "Otelo"
+RETURN "Programacion en Pascal"
+RETURN "Platero y yo"
+SHELVE
+RETURN "Algoritmica"
+RETURN "Ingenieria del software"
+SHELVE
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+SHELVE
+BORROW "Ingenieria del software"
+BORROW "El alcalde de Zalamea"
+BORROW "Platero y yo"
+BORROW "La tabla de Flandes"
+BORROW "Frankenstein"
+BORROW "Programacion en Pascal"
+RETURN "Algoritmica"
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+BORROW "Algoritmica"
+BORROW "El Quijote"
+BORROW "Turbo C/C++"
+SHELVE
+BORROW "La ciudad de la alegria"
+BORROW "It"
+BORROW "Otelo"
+RETURN "Ingenieria del software"
+RETURN "El alcalde de Zalamea"
+SHELVE
+RETURN "Platero y yo"
+RETURN "La tabla de Flandes"
+SHELVE
+RETURN "Frankenstein"
+RETURN "Programacion en Pascal"
+RETURN "Algoritmica"
+SHELVE
+RETURN "El Quijote"
+RETURN "Turbo C/C++"
+SHELVE
+RETURN "La ciudad de la alegria"
+RETURN "It"
+RETURN "Otelo"
+SHELVE
+END
