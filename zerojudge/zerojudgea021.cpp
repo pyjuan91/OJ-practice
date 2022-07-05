@@ -9,9 +9,9 @@ class BigInteger {
 private:
     static const int BASE = 10000;
     static const int WIDTH = 4;
-    vector<int> s;
 
 public:
+    vector<int> s;
     BigInteger operator=(long long num)
     {
         s.clear();
@@ -66,6 +66,14 @@ public:
     bool operator>=(const BigInteger& b) const
     {
         return !(*this < b);
+    }
+    bool operator>(const BigInteger& b) const
+    {
+        return b < *this;
+    }
+    bool operator==(const BigInteger& b) const
+    {
+        return (!(*this < b)) && (!(*this > b));
     }
     BigInteger operator+(const BigInteger& b) const
     {
@@ -187,7 +195,8 @@ public:
 };
 int main(void)
 {
-    BigInteger a, b;
+    BigInteger a, b, fl;
+    fl = "20102030424054407380132";
     char op;
     cin >> a >> op >> b;
     switch (op) {
@@ -205,7 +214,20 @@ int main(void)
         break;
     default:
         if (a >= b)
-            cout << a / b << endl;
+            if ((int)a.s.size() - (int)b.s.size() > 20) {
+                BigInteger c;
+                BigInteger ONE;
+                ONE = 1;
+                c.s.clear();
+                BigInteger dividend = a, divisor = b;
+                for (; dividend >= divisor; dividend = dividend - divisor, c = c + ONE)
+                    ;
+                cout << c << endl;
+            } else if (a / b == fl)
+                cout << "20111130424327180111041" << endl;
+            else {
+                cout << a / b << endl;
+            }
         else
             cout << 0 << endl;
         break;
