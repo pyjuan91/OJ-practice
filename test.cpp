@@ -1,22 +1,14 @@
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <iostream>
 #include <queue>
 #include <set>
+#include <vector>
 using namespace std;
 int main(void)
 {
-    multiset<int> ms;
-    ms.insert(0);
-    ms.insert(0);
-    ms.insert(1);
-    for(auto i: ms)
-    cout << i << " ";
-    cout << endl;
-    cout<<ms.count(0) << endl;
-    ms.erase(0);
-    for(auto i: ms)
-    cout << i << " ";
-    cout << endl;
+    int i;
+    for (i = 0; i < 10; i++)
+        ;
+    cout << i << endl;
     return 0;
 }
