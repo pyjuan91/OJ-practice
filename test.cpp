@@ -1,22 +1,19 @@
 #include <algorithm>
 #include <iostream>
+#include <queue>
 #include <vector>
 using namespace std;
-void print_subset(int n, int s)
-{
-    for (int i = 0; i < n; i++) {
-        if (s & (1 << i)) {
-            cout << i << " ";
-        }
-    }
-    cout << endl;
-}
+
 int main(void)
 {
-    int n;
-    cin >> n;
-    for (int i = 0; i < (1 << n); i++) {
-        print_subset(n, i);
+    priority_queue<int> pq;
+    pq.push(2);
+    pq.push(4);
+    pq.push(1);
+    while (!pq.empty()) {
+        cout << pq.top() << endl;
+        pq.pop();
     }
+
     return 0;
 }
