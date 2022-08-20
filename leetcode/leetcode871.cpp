@@ -69,8 +69,6 @@ public:
             } else {
                 startFuel += stations[index][1];
             }
-            cout << "ref " << stations[index][0] << " " << stations[index][1] << endl;
-            cout << "pos: " << pos << " fuel: " << startFuel << endl;
             pq.pop();
         }
         return ans;
