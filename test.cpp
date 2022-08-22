@@ -6,14 +6,8 @@ using namespace std;
 
 int main(void)
 {
-    priority_queue<int> pq;
-    pq.push(2);
-    pq.push(4);
-    pq.push(1);
-    while (!pq.empty()) {
-        cout << pq.top() << endl;
-        pq.pop();
-    }
+    vector<int> v(10);
+    cout << v.size() << endl;
 
     return 0;
 }
