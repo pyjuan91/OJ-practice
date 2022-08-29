@@ -26,19 +26,16 @@ public:
     {
         if (!head || !head->next)
             return head;
-        ListNode *oddHead = new ListNode(head->val), *oddPos = oddHead;
-        ListNode *evenHead = new ListNode(head->next->val), *evenPos = evenHead;
-        ListNode* pos = head->next;
-        while (pos && pos->next) {
-            oddPos->next = new ListNode(pos->next->val);
-            if (pos->next->next)
-                evenPos->next = new ListNode(pos->next->next->val);
+        ListNode* oddHead = head;
+        ListNode *evenHead = head->next, *evenPos = evenHead;
+        while (evenPos && evenPos->next) {
+            oddHead->next = evenPos->next;
+            evenPos->next = evenPos->next->next;
             evenPos = evenPos->next;
-            oddPos = oddPos->next;
-            pos = pos->next->next;
+            oddHead = oddHead->next;
         }
-        oddPos->next = evenHead;
-        return oddHead;
+        oddHead->next = evenHead;
+        return head;
     }
 };
 int main(void) { return 0; }
