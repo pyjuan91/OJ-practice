@@ -7,37 +7,63 @@
 //     15, 16, 17, 18, 19,
 //     20, 21, 22, 23, 24
 // };
-// int n, x[30], y[30], population[30], offices[5], used[30], hasSet[25], res[5];
+// int n, x[30], y[30], population[30], offices[5], used[30], hasSet[25], res[5], cur = 0;
 // long long dis = INT32_MAX;
-// void helper(int now)
+// vector<pair<int, int>> v;
+// void dfs(int p, int office)
 // {
-//     if (now == 5) {
-//         long long sum = 0, tps;
-//         for (int i = 0; i < n; i++) {
-//             cout << "x: " << x[i] << " y: " << y[i] << endl;
-//             if (used[MAP[x[i]][y[i]]]) {
-//                 continue;
+//     if (office >= 5) {
+//         int sum = 0;
+//         for (int j = 0; j < 25; j++) {
+//             int compute = INT32_MAX, temp;
+//             for (int i = 0; i < 5; i++) {
+//                 temp = population[j] * (abs(offices[i] / 5 - j / 5) + abs(offices[i] % 5 - j % 5));
+//                 compute = min(temp, compute);
 //             }
-//             tps = INT32_MAX;
-//             for (int j = 0; j < 5; j++) {
-//                 tps = min(tps,
-//                     (long long)abs(offices[i] / 5 - x[i]) + (long long)abs((offices[i] % 5) - y[i]));
-//             }
-//             sum += tps;
+//             sum += compute;
 //         }
+
 //         if (sum < dis) {
-//             for (int i = 0; i < 5; i++)
+//             dis = sum;
+//             for (int i = 0; i < 5; i++) {
 //                 res[i] = offices[i];
+//             }
 //         }
 //         return;
 //     }
-//     for (int i = 0; i < n; i++) {
-//         if (used[i] == 0) {
-//             offices[now] = MAP[x[i]][y[i]];
-//             used[i] = 1;
-//             helper(now + 1);
-//             used[i] = 0;
+//     for (int i = p + 1; i < 25; i++) {
+//         offices[office] = i;
+//         dfs(i, office + 1);
+//     }
+//     // for (int i = p + 1; i < n; i++) {
+//     //     offices[office] = MAP[x[i]][y[i]];
+//     //     dfs(i, office + 1);
+//     // }
+// }
+// void helper(int now, int pos)
+// {
+//     if (now >= 5) {
+//         int sum = 0;
+//         for (int j = 0; j < 25; j++) {
+//             int compute = INT32_MAX, temp;
+//             for (int i = 0; i < 5; i++) {
+//                 temp = population[j] * (abs(offices[i] / 5 - j / 5) + abs(offices[i] % 5 - j % 5));
+//                 compute = min(temp, compute);
+//             }
+//             sum += compute;
 //         }
+
+//         if (sum < dis) {
+//             dis = sum;
+//             for (int i = 0; i < 5; i++) {
+//                 res[i] = offices[i];
+//             }
+//         }
+//         return;
+//     }
+//     for (int i = pos + 1; i < n; i++) {
+//         offices[now] = MAP[x[i]][y[i]];
+//         helper(now + 1, i);
 //     }
 // }
 // void special(void)
@@ -60,15 +86,26 @@
 //     cin >> t;
 //     while (t--) {
 //         cin >> n;
-//         dis = 0;
+//         dis = INT32_MAX;
+//         memset(population, 0, sizeof(population));
+//         v.clear();
 //         for (int i = 0; i < n; i++) {
-//             cin >> x[i] >> y[i] >> population[i];
+//             pair<int, int> p;
+//             cin >> p.first >> p.second;
+//             v.push_back(p);
+//             cin >> population[MAP[p.first][p.second]];
 //             used[i] = hasSet[i] = 0;
+//         }
+//         sort(v.begin(), v.end());
+//         for (int i = 0; i < n; i++) {
+//             x[i] = v[i].first;
+//             y[i] = v[i].second;
 //         }
 //         if (n <= 5) {
 //             special();
 //         } else {
-//             helper(0);
+//             // helper(0, -1);
+//             dfs(-1, 0);
 //         }
 //         sort(res, res + 5);
 //         printf("%d %d %d %d %d\n", res[0], res[1],
@@ -82,31 +119,31 @@
 #define MAXN 30
 using namespace std;
 int num[MAXN], ans[MAXN], result[MAXN];
-int t, n, a, b, c; 
+int t, n, a, b, c;
 int d = MAXN*MAXN*1000;
 
 void dfs(int p, int office){
-    if(office >= 5){ 
-        int sum = 0; 
-        for(int j = 0; j < 25; j++){ 
-            int compute = MAXN*MAXN*1000, temp; 
-            for(int i = 0; i < 5; i++){ 
+    if(office >= 5){
+        int sum = 0;
+        for(int j = 0; j < 25; j++){
+            int compute = MAXN*MAXN*1000, temp;
+            for(int i = 0; i < 5; i++){
                 temp = num[j] * (abs(result[i]/5 - j/5) + abs(result[i]%5 - j%5));
-                compute = min(temp, compute); 
+                compute = min(temp, compute);
             }
-            sum += compute; 
+            sum += compute;
         }
 
-        if(sum < d){ 
-            d = sum; 
-            for(int i = 0; i < 5; i++){ 
+        if(sum < d){
+            d = sum;
+            for(int i = 0; i < 5; i++){
                 ans[i] = result[i];
             }
         }
         return;
     }
     for(int i = p+1; i < 25; i++){
-        result[office] = i; 
+        result[office] = i;
         dfs(i, office+1);
     }
 }
@@ -122,9 +159,9 @@ int main()
             num[a*5+b] = c;
         }
         d = MAXN*MAXN*1000;
-        dfs(-1, 0); 
+        dfs(-1, 0);
         cout << ans[0];
-        for(int i = 1; i < 5; i++) cout << ' ' << ans[i]; 
+        for(int i = 1; i < 5; i++) cout << ' ' << ans[i];
         cout << '\n';
     }
     return 0;
