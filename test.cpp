@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
 int main(void){
-    cout<<"test"<<endl;
+    cout<<(char)90<<endl;
     return 0;
 }
