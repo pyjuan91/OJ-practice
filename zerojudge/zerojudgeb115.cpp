@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-// C++ program to implement
-// the above approach
 #include <bits/stdc++.h>
 
 using namespace std;
