@@ -4,21 +4,37 @@
 #include <string>
 using namespace std;
 int sudo[81], row[9][10], col[9][10], grid[3][3][10];
-bool hasSol;
 bool input(void);
 void init(void);
 void output(void);
-void solve(int cur);
+bool solve(int cur);
 bool checkValid(int cur, int num);
+void update(int r, int c, int num, int val);
+bool checkAll(void)
+{
+    for (int cur = 0; cur < 81; cur++) {
+        if (sudo[cur] == 0)
+            continue;
+        if (!checkValid(cur, sudo[cur]))
+            return false;
+        update(cur / 9, cur % 9, sudo[cur], 1);
+    }
+    return true;
+}
+
 int main(void)
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     while (input()) {
         init();
-        solve(0);
-        if (!hasSol)
-            cout << "No solution\n";
+        if (!checkAll()) {
+            cout << "No solution.\n";
+            continue;
+        }
+        if (!solve(0)) {
+            cout << "No solution.\n";
+        }
     }
     return 0;
 }
@@ -38,7 +54,6 @@ bool input(void)
 }
 void init(void)
 {
-    hasSol = false;
     memset(row, 0, sizeof(row));
     memset(col, 0, sizeof(col));
     memset(grid, 0, sizeof(grid));
@@ -58,15 +73,11 @@ bool checkValid(int cur, int num)
 
     return !row[r][num] && !col[c][num] && !grid[gi][gj][num];
 }
-void solve(int cur)
+bool solve(int cur)
 {
-    if (hasSol)
-        return;
     if (cur == 81) {
-        if (!hasSol)
         output();
-        hasSol = true;
-        return;
+        return true;
     }
 
     int r = cur / 9;
@@ -79,18 +90,20 @@ void solve(int cur)
             if (checkValid(cur, i)) {
                 sudo[cur] = i;
                 row[r][i] = col[c][i] = grid[gi][gj][i] = 1;
-                solve(cur + 1);
+                if (solve(cur + 1))
+                    return true;
                 row[r][i] = col[c][i] = grid[gi][gj][i] = 0;
             }
-            if (hasSol)
-                return;
         }
         sudo[cur] = 0;
-        if (!hasSol)
-            return;
-    } else if (checkValid(cur, sudo[cur])) {
-        row[r][sudo[cur]] = col[c][sudo[cur]] = grid[gi][gj][sudo[cur]] = 1;
-        solve(cur + 1);
-        row[r][sudo[cur]] = col[c][sudo[cur]] = grid[gi][gj][sudo[cur]] = 0;
+        return false;
+    } else {
+        return solve(cur + 1);
     }
+}
+void update(int r, int c, int num, int val)
+{
+    row[r][num] = val;
+    col[c][num] = val;
+    grid[r/3][c/3][num] = val;
 }
