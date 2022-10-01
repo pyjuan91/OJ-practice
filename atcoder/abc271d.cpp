@@ -67,18 +67,12 @@ int main(void)
                 dp[i][j] = true;
             } else
                 dp[i][j] = false;
-            // cout << "i: " << i << " j: " << j << " " << dp[i][j] << endl;
         }
     }
 
-    // for (int i = 0; i <= n; i++) {
-    //     for (int j = 0; j <= s; j++) {
-    //         cout << "i: " << i << " j: " << j << " " << dp[i][j] << endl;
-    //     }
-    // }
     if (dp[n][s]) {
         cout << "Yes\n";
-        char str[n + 1];
+        char str[n+1];
         str[n] = '\0';
         for (int i = n - 1; i >= 0; i--) {
             if ((s - a[i + 1] >= 0) && dp[i][s - a[i + 1]]) {
