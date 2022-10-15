@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <algorithm>
 #include <iostream>
 #include <map>
@@ -14,5 +15,4 @@ int main(void)
     iter = m[1].lower_bound(2);
     cout << (iter == m[1].end()) << endl;
     cout << *iter << endl;
-    return 0;
 }
