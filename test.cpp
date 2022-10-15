@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <algorithm>
 #include <iostream>
 #include <map>
