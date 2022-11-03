@@ -1,147 +1,78 @@
-// #include <algorithm>
-// #include <cstring>
-// #include <iostream>
-// #include <iterator>
-// #include <map>
-// #include <string>
-// #include <vector>
-// using namespace std;
-// map<int, vector<int>> queue;
-// vector<int> where;
-// int main(void)
-// {
-//     ios_base::sync_with_stdio(false);
-//     cin.tie(NULL);
-//     int n, m, cmd, a, b;
-//     cin >> n >> m;
-//     where.push_back(0);
-//     for (int i = 1; i <= n; i++) {
-//         where.push_back(i);
-//     }
-//     while (m--) {
-//         cin >> cmd >> a >> b;
-//         if (a == b)
-//             continue;
-//         if (cmd == 0) {
-//             // deal with person a
-//             int source = where[a], target = where[b];
-//             vector<int>::iterator iter = find(queue[source].begin(), queue[source].end(), a);
-//             queue[source].erase(iter);
-//             iter = find(queue[target].begin(), queue[target].end(), b);
-//             iter = next(iter);
-//             queue[target].insert(iter, a);
-//             where[a] = target;
-//         } else {
-//             for (auto i : queue[a]) {
-//                 where[i] = b;
-//                 queue[b].push_back(i);
-//             }
-//             queue[a].clear();
-//         }
-//     }
-//     for (int i = 1; i <= n; i++) {
-//         cout << "#" << i << ":";
-//         for (auto j : queue[i])
-//             cout << " " << j;
-//         cout << "\n";
-//     }
-//     return 0;
-// }
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <vector>
 using namespace std;
-int where[1000005], head[1000005], tail[1000005], myNext[1000005], myPrev[1000005];
+const int maxn = 1000005;
+int left[maxn], right[maxn], queue[maxn], tail[maxn];
+void link(int L, int R)
+{
+    right[L] = R;
+    left[R] = L;
+}
 int main(void)
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     int n, m, cmd, a, b;
-    cin >> n >> m;
+    scanf("%d%d", &n, &m);
     for (int i = 1; i <= n; i++) {
-        where[i] = i;
-        head[i] = i;
-        tail[i] = i;
-        myNext[i] = 0;
-        myPrev[i] = 0;
+        left[i] = right[i] = -i;
+        queue[i] = tail[i] = i;
     }
-    while (m--) {
-        cin >> cmd >> a >> b;
+    for (int i = 0; i < m; i++) {
+        scanf("%d%d%d", &cmd, &a, &b);
         if (cmd == 0) {
-            // remove a
-            if (head[where[a]] == a && tail[where[a]] == a) {
-                head[a] = tail[a] = 0;
-            } else if (head[where[a]] == a) {
-                head[where[a]] = myNext[a];
-                myPrev[myNext[a]] = 0;
-            } else if (tail[where[a]] == a) {
-                tail[where[a]] = myPrev[a];
-                myNext[myPrev[a]] = 0;
+
+            if (left[a] < 0) {
+                if (right[a] < 0) {
+                    queue[-left[a]] = -1;
+                    tail[-left[a]] = -1;
+                } else {
+                    queue[-left[a]] = right[a];
+                    left[right[a]] = left[a];
+                }
+            } else if (right[a] < 0) {
+                right[left[a]] = right[a];
+                tail[-right[a]] = left[a];
             } else {
-                int curNext = myNext[a], curPrev = myPrev[a];
-                myNext[curPrev] = curNext;
-                myPrev[curNext] = curPrev;
+                link(left[a], right[a]);
             }
 
-            // insert a in b;
-            if (tail[where[b]] == b) {
-                myNext[b] = a;
-                myPrev[a] = b;
-                myNext[a] = 0;
-                tail[where[b]] = a;
-                where[a] = where[b];
+            int rb = right[b];
+            link(b, a);
+            if (rb > 0) {
+                link(a, rb);
             } else {
-                int bNext = myNext[b];
-                myNext[b] = a;
-                myPrev[a] = b;
-                myNext[a] = bNext;
-                myPrev[bNext] = a;
-                where[a] = where[b];
+                right[a] = rb;
+                tail[-rb] = a;
             }
-            
+
         } else {
-            if (head[a] == 0)
+
+            if (queue[a] < 0) {
                 continue;
-            if (tail[b] == 0) {
-                int cur = head[a];
-                head[b] = tail[b] = head[a];
-                while (cur) {
-                    where[cur] = b;
-                    tail[b] = cur;
-                    cur = myNext[cur];
-                }
-                head[a] = tail[a] = 0;
+            } else if (queue[b] < 0) {
+                queue[b] = queue[a];
+                tail[b] = tail[a];
+                queue[a] = -1;
+                tail[a] = -1;
+                left[queue[b]] = -b;
+                right[tail[b]] = -b;
             } else {
-                int cur = head[a], cur_prev = tail[b];
-                while (cur) {
-                    where[cur] = b;
-                    tail[b] = cur;
-                    cur = myNext[cur];
-                }
-                myNext[cur_prev] = head[a];
-                myPrev[head[a]] = cur_prev;
-                head[a] = tail[a] = 0;
+                link(tail[b], queue[a]);
+                right[tail[a]] = -b;
+                tail[b] = tail[a];
+                queue[a] = -1;
+                tail[a] = -1;
             }
         }
-        // for (int i = 1; i <= n; i++) {
-        //     cout << "#" << i << ":";
-        //     int tmp = head[i];
-        //     while (tmp != 0) {
-        //         cout << " " << tmp;
-        //         tmp = myNext[tmp];
-        //     }
-        //     cout << "\n";
-        // }
-        // cout << "\n";
     }
 
     for (int i = 1; i <= n; i++) {
-        cout << "#" << i << ":";
-        int tmp = head[i];
-        while (tmp != 0) {
-            cout << " " << tmp;
-            tmp = myNext[tmp];
+        int cur = queue[i];
+        printf("#%d:", i);
+        while (cur > 0) {
+            printf(" %d", cur);
+            cur = right[cur];
         }
-        cout << "\n";
+        printf("\n");
     }
     return 0;
 }
