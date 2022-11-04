@@ -1,111 +1,87 @@
 #include <algorithm>
 #include <climits>
-#include <iostream>
-#include <queue>
+#include <cstdio>
+#include <cstring>
+#include <vector>
 using namespace std;
-class Point {
-public:
-    int i, j;
-    Point() { }
-    Point(int i, int j)
-        : i(i)
-        , j(j)
-    {
+int hive[12][7];
+bool vist[12][7];
+const int dx[6] = { 0, 0, -1, -1, 1, 1 };
+const int dyEven[6] = { -1, 1, 0, 1, 0, 1 };
+const int dyOdd[6] = { -1, 1, -1, 0, -1, 0 };
+int helper(int r, int c, int st_r, int st_c,
+    int cur_r, int cur_c, int des_r, int des_c, vector<pair<int,int>> v)
+{
+    if (cur_r == des_r && cur_c == des_c)
+        return hive[des_r][des_c];
+    // if (vist[cur_r][cur_c] && (cur_r != st_r || cur_c != st_c))
+    //     return INT_MAX;
+
+    bool isEven = ((cur_r % 2) == 0);
+    int mi = INT_MAX;
+    int cv, route_r, route_c;
+    printf("cur: %d %d, val: %d\n", cur_r, cur_c, hive[cur_r][cur_c]);
+    for (int i = 0; i < 6; i++) {
+        int nx = cur_r + dx[i];
+        int ny = cur_c + (isEven ? dyEven[i] : dyOdd[i]);
+
+        if (nx < 1 || nx > r || ny < 1 || ny > c
+            || (vist[nx][ny] && (nx != des_r || ny != des_c)))
+            continue;
+
+        printf("new: %d %d, val: %d\n", nx, ny, hive[nx][ny]);
+
+        vist[nx][ny] = true;
+        cv = helper(r, c, st_r, st_c, nx, ny, des_r, des_c);
+        vist[nx][ny] = false;
+
+        if (cv < mi) {
+            mi = cv;
+            route_r = nx;
+            route_c = ny;
+        }
     }
-
-    bool operator==(const Point& p) const
-    {
-        return i == p.i && j == p.j;
+    if (mi == INT_MAX) {
+        return INT_MAX;
+    } else {
+        // vist[route_r][route_c] = true;
+        return hive[cur_r][cur_c] + mi;
     }
-};
-
-int N, R, C;
-int hive[12][7], used[12][7];
-Point two[2], three[2];
-int mincost;
-static const int di[4] = { 0, -1, 0, 1 };
-static const int dj[4] = { 1, 0, -1, 0 };
-
-void input(void);
-void compute(void);
-void dfs(int, int, int, int);
-int bfs(void);
+}
 int main(void)
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cin >> N;
-    while (N--) {
-        input();
+    int n, r, c, r1, r2, r3, r4, c1, c2, c3, c4;
+    scanf("%d", &n);
+    while (n--) {
+        scanf("%d%d", &r, &c);
+        scanf("%d%d%d%d%d%d%d%d",
+            &r1, &r2, &r3, &r4, &c1, &c2, &c3, &c4);
+        for (int i = 1; i <= r; i++) {
+            for (int j = 1; j <= c; j++) {
+                scanf("%d", &hive[i][j]);
+                vist[i][j] = false;
+            }
+        }
+        long long ans1, ans2;
+        vist[r1][r2] = vist[r3][r4] = vist[c1][c2] = vist[c3][c4] = true;
+        ans1 = helper(r, c, r1, r2, r1, r2, r3, r4);
+        //     + helper(r, c, c1, c2, c1, c2, c3, c4);
+        // memset(vist, false, sizeof(vist));
+        // vist[r1][r2] = vist[r3][r4] = vist[c1][c2] = vist[c3][c4] = true;
+        // ans2 = helper(r, c, c1, c2, c1, c2, c3, c4)
+        //     + helper(r, c, r1, r2, r1, r2, r3, r4);
+        // if (ans1 >= INT_MAX && ans2 >= INT_MAX) {
+        //     printf("-1\n");
+        //     continue;
+        // }
+        // printf("%lld\n", min(ans1, ans2));
+        printf("%lld\n", ans1);
+        for (int i = 1; i <= r; i++) {
+            for (int j = 1; j <= c; j++) {
+                printf(" %d", vist[i][j]);
+            }
+            printf("\n");
+        }
     }
     return 0;
-}
-void input(void)
-{
-    cin >> R >> C;
-
-    for (int i = 0; i < R + 2; i++)
-        used[i][0] = used[i][R + 1] = 1;
-    for (int j = 0; j < C + 2; j++)
-        used[0][j] = used[C + 1][j] = 1;
-
-    cin >> two[0].i >> two[0].j;
-    cin >> two[1].i >> two[1].j;
-    cin >> three[0].i >> three[0].j;
-    cin >> three[1].i >> three[1].j;
-
-    for (int i = 1; i <= R; i++) {
-        for (int j = 1; j <= C; j++) {
-            used[i][j] = 0;
-            cin >> hive[i][j];
-        }
-    }
-}
-
-void dfs(int i, int j, int dist, int pre)
-{
-    if (i == two[1].i && j == two[1].j) {
-        mincost = min(mincost, dist + bfs());
-        return;
-    }
-
-    if (dist /*+ manhattanDist(i, j)*/ > mincost)
-        return;
-
-    if (pre != -1) {
-        for (int r = 0; r < 4; r++) {
-            if (r == pre)
-                continue;
-            if (i + di[r] == two[1].i && j + dj[r] == two[1].j)
-                continue;
-            if (G[i + di[r]][j + dj[r]] == TWO)
-                return;
-        }
-    }
-
-    G[i][j] = TWO;
-
-    if (cut(i, j))
-        return;
-
-    int ni, nj;
-    for (int d = 0; d < 4; d++) {
-        ni = i + di[d];
-        nj = j + dj[d];
-        char target = G[ni][nj];
-        if (target == EMPTY || (ni == two[1].i && nj == two[1].j)) {
-            dfs(ni, nj, dist + 1, (d + 2) % 4);
-            G[ni][nj] = target;
-        }
-    }
-}
-
-void compute(void)
-{
-    mincost = INT32_MAX;
-    dfs(two[0].i, two[0].j, 0, -1);
-    if (mincost >= INT32_MAX)
-        cout << 0 << endl;
-    else
-        cout << mincost << endl;
 }
