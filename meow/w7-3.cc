@@ -1,66 +1,65 @@
-#include <bits/stdc++.h>
-#define endl '\n'
+#include <algorithm>
+#include <bitset>
+#include <iostream>
+#include <vector>
 using namespace std;
-int main(void)
+#define ll long long
+const int MAX = 1e6 + 5;
+bitset<MAX> isPrime;
+vector<int> primes;
+int spf[MAX];
+int mobius[MAX];
+void sieve()
 {
-    srand(time(nullptr));
-    int x =rnad();
-    cout << x << endl;
-    cout << RAND_MAX << endl;
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
+    isPrime.set();
+    isPrime[0] = isPrime[1] = 0;
+    mobius[1] = 1;
+    for (int i = 2; i < MAX; i++) {
+        if (isPrime[i]) {
+            primes.push_back(i);
+            spf[i] = i;
+            mobius[i] = -1;
+        }
+        for (int j = 0; j < (int)primes.size()
+             && primes[j] <= (MAX - 1) / i;
+             j++) {
+            int p = primes[j];
+            isPrime[i * p] = 0;
+            spf[i * p] = p;
+            mobius[i * p] = (spf[i] == p) ? 0 : -mobius[i];
+            if (i % primes[j] == 0)
+                break;
+        }
+    }
+}
+void solve(int tc = 0)
+{
+    sieve();
     int n;
-    map<int, int> m;
     cin >> n;
+    vector<int> cnt(MAX);
     while (n--) {
+        int x;
         cin >> x;
-        if (!m.count(x))
-            m[x] = 1;
-        else
-            m[x] += 1;
+        cnt[x]++;
     }
-    auto iter = m.end();
-    iter--;
-    int ma = iter->first;
-    vector<vector<int>> prime_factor(ma + 1);
-
-    for (int i = 2; i <= ma; i++) {
-        if (prime_factor[i].empty()) {
-            for (int j = i; j <= ma; j += i) {
-                prime_factor[j].emplace_back(i);
-            }
-        }
+    ll ans = 0;
+    for (int i = 1; i < MAX; i++) {
+        ll num = 0;
+        for (int j = i; j < MAX; j += i)
+            num += cnt[j];
+        ans += num * (num - 1) / 2 * mobius[i];
     }
-
-    // for (int i = 2; i <= ma; i++) {
-    //     cout << i << ": ";
-    //     for (int& j : prime_factor[i])
-    //         cout << j << " ";
-    //     cout << endl;
-    // }
-
-    int cnt = 0;
-    for (auto it1 = m.begin(); it1 != m.end(); it1++) {
-        for (auto it2 = it1; it2 != m.end(); it2++) {
-            if (it2 == it1)
-                continue;
-            vector<int> check;
-            set_intersection(prime_factor[it1->first].begin(),
-                prime_factor[it1->first].end(),
-                prime_factor[it2->first].begin(),
-                prime_factor[it2->first].end(),
-                back_inserter(check));
-            if (check.empty()) {
-                cnt += it1->second * it2->second;
-                // cout << it1->first << " " << it1->second << endl;
-                // cout << it2->first << " " << it2->second << endl;
-            }
-        }
+    cout << ans << "\n";
+}
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int tc = 1;
+    // cin >> tc;
+    for (int t = 1; t <= tc; t++) {
+        // cout << "Case #" << t << ": ";
+        solve(t);
     }
-    if (m[1] > 1) {
-        cnt += m[1] * (m[1] - 1) / 2;
-    }
-    cout << cnt << endl;
-
-    return 0;
 }
