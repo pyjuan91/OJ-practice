@@ -5,8 +5,8 @@ void traverse(vector<vector<int>>& node, vector<bool>& used,
     int now)
 {
     used[now] = true;
-    for(auto i: node[now]){
-        if(used[i] == false){
+    for (auto i : node[now]) {
+        if (used[i] == false) {
             traverse(node, used, i);
         }
     }
