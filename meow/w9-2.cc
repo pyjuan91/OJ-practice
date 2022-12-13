@@ -1,70 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-map<pair<int, int>, int> route;
-int used[100005];
-long long ans[100005];
-int n;
-void init();
-void dijkstra(int syrjala);
+using ll = long long;
+const ll INF = 1e14 + 5;
+vector<ll> dijkstra(const vector<vector<pair<int, int>>>& g, int start)
+{
+    int n = g.size();
+    vector<ll> d(n, INF);
+    vector<bool> used(n, false);
+    using QP = pair<long long, int>;
+    priority_queue<QP, vector<QP>, greater<QP>> prique;
+    d[start] = 0;
+    prique.push(make_pair(d[start], start));
+    while (!prique.empty()) {
+        int st = prique.top().second;
+        prique.pop();
+        if (used[st])
+            continue;
+        used[st] = true;
+        for (auto [en, cost] : g[st]) {
+            if (d[en] > d[st] + cost) {
+                d[en] = d[st] + cost;
+                prique.push(make_pair(d[en], en));
+            }
+        }
+    }
+    return d;
+}
 int main(void)
 {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    int m, a, b, c;
+    int n, m, a, b, c;
     cin >> n >> m;
-    init();
+    vector<vector<pair<int, int>>> graph;
+    graph.resize(n + 1);
     while (m--) {
         cin >> a >> b >> c;
-        if (route[{ a, b }] == 0) {
-            route[{ a, b }] = c;
-            route[{ b, a }] = c;
-        } else {
-            route[{ a, b }] = min(route[{ a, b }], c);
-            route[{ b, a }] = min(route[{ b, a }], c);
-        }
+        graph[a].emplace_back(make_pair(b, c));
     }
-    // cout << endl;
-    // for (auto i : route) {
-    //     cout << i.first.first << " " << i.first.second
-    //          << " " << i.second << endl;
-    // }
-    dijkstra(1);
+    vector<ll> ans = dijkstra(graph, 1);
     for (int i = 1; i <= n; i++) {
-        if (i > 1)
-            cout << " ";
-        std::cout << ans[i];
+        cout << ans[i] << " ";
     }
-    std::cout << endl;
     return 0;
-}
-void init()
-{
-    for (int i = 1; i <= n; i++) {
-        used[i] = 0;
-        ans[i] = 1e14 + 5;
-    }
-}
-void dijkstra(int syrjala)
-{
-    ans[syrjala] = 0;
-
-    for (int i = 1; i <= n; i++) {
-        int next = -1;
-        long long mi = 1e14 + 5;
-        for (int j = 1; j <= n; j++) {
-            if (used[j] == 0 && ans[j] < mi) {
-                mi = ans[j];
-                next = j;
-            }
-        }
-        if (next == -1)
-            break;
-        used[next] = 1;
-        for (int j = 1; j <= n; j++) {
-            if (used[j] == 0 && route[{ next, j }]
-                && ans[next] + route[{ next, j }] < ans[j]) {
-                ans[j] = ans[next] + route[{ next, j }];
-            }
-        }
-    }
 }
