@@ -1,9 +1,9 @@
 # UseTab: Always
 UseTab: ForContinuationAndIndentation
-IndentWidth: 2
-TabWidth: 2
+IndentWidth: 4
+TabWidth: 4
 ColumnLimit: 50
-AccessModifierOffset: 2
+AccessModifierOffset: 0
 AlignAfterOpenBracket: AlwaysBreak
 AlignArrayOfStructures: None
 AlignConsecutiveAssignments: None
