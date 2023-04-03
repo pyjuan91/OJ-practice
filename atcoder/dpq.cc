@@ -4,7 +4,7 @@ using ll = long long;
 const int maxn = 2e5 + 5;
 int N, h[maxn], a[maxn];
 ll seg[2 * maxn];
-ll query(int l, int r) { // sum on interval [l, r]
+ll query(int l, int r) {
 	ll res = 0;
 	for (l += N, r += N; l < r; l >>= 1, r >>= 1) {
 		if (l & 1) res = max(res, seg[l++]);
