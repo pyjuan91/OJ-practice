@@ -23,10 +23,7 @@ int main() {
 	ll res = 0;
 	for (int i = 0; i < N; i++) cin >> h[i];
 	for (int i = 0; i < N; i++) cin >> a[i];
-	for (int i = 0; i < N; i++) {
-		modify(h[i] - 1, a[i]);
-		res = max(res, query(0, h[i]));
-	}
-	cout << res;
+	for (int i = 0; i < N; i++) modify(h[i] - 1, a[i]);
+	cout << seg[1];
 	return 0;
 }
