@@ -1,0 +1,5 @@
+N = int(input())
+li = list(map(int, input().split()))
+target = round(sum(li) / N)
+res = sum([(li[i] - target) ** 2 for i in range(N)])
+print(res)
