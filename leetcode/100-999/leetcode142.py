@@ -1,6 +1,5 @@
 # Definition for singly-linked list.
 from typing import Optional
-from collections import defaultdict
 
 
 class ListNode:
@@ -8,17 +7,14 @@ class ListNode:
         self.val = x
         self.next = None
 
-
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if head == None or head.next == None:
+        if not head or not head.next:
             return None
-        slow = fast = head
-
-        ans = head
+        slow = fast = ans = head
         while True:
-            if fast.next == None or fast.next.next == None:
-                break
+            if not fast.next or not fast.next.next:
+                return None
             fast = fast.next.next
             slow = slow.next
 
@@ -26,7 +22,7 @@ class Solution:
                 while ans != slow:
                     ans = ans.next
                     slow = slow.next
-
-                return ans
-
-        return None
+                break
+        
+        return slow
+        
