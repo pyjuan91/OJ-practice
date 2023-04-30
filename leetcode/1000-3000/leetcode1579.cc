@@ -11,13 +11,14 @@ class DisjointSet {
 		}
 		int find_root(int a) {
 			if (parent[a] == a) return a;
-			return parent[a] = find_root(a);
+			return parent[a] = find_root(parent[a]);
 		}
 		bool is_same(int a, int b) {
 			return find_root(a) == find_root(b);
 		}
 		void unite(int a, int b) {
-			parent[find_root(a)] = find_root(b);
+			int a_root = find_root(a), b_root = find_root(b);
+			parent[a_root] = b_root;
 		}
 };
 class Solution {
@@ -36,7 +37,7 @@ class Solution {
 					else alice.unite(edge[1], edge[2]);
 				}
 				if (edge[0] == 3 || edge[0] == 2) {
-					if (bob.is_same(edge[1], edge[2])) res += 1;
+					if (bob.is_same(edge[1], edge[2]) && edge[0] == 2)res += 1;
 					else bob.unite(edge[1], edge[2]);
 				}
 			}
