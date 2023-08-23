@@ -1,26 +1,54 @@
 #include <bits/stdc++.h>
-#define int long long
 using namespace std;
+int chaewon(int odd, int even, int alice, int alice_turn, auto& dp) {
+	if (dp[odd][even][alice][alice_turn] != -1)
+		return dp[odd][even][alice][alice_turn];
+	if (odd + even == 0) {
+		dp[odd][even][alice][alice_turn] = alice;
+		return alice;
+	}
+	if (alice_turn == 0) {
+		if (odd > 0 && chaewon(odd - 1, even, alice ^ 1, 1, dp) == 0) {
+			dp[odd][even][alice][alice_turn] = 0;
+			return 0;
+		}
+		if (even > 0 && chaewon(odd, even - 1, alice, 1, dp) == 0) {
+			dp[odd][even][alice][alice_turn] = 0;
+			return 0;
+		}
+		dp[odd][even][alice][alice_turn] = 1;
+		return 1;
+	}
+	if (odd > 0 && chaewon(odd - 1, even, alice, 0, dp) == 1) {
+		dp[odd][even][alice][alice_turn] = 1;
+		return 1;
+	}
+	if (even > 0 && chaewon(odd, even - 1, alice, 0, dp) == 1) {
+		dp[odd][even][alice][alice_turn] = 1;
+		return 1;
+	}
+	dp[odd][even][alice][alice_turn] = 0;
+	return 0;
+}
 int32_t main() {
 	cin.tie(nullptr)->sync_with_stdio(false);
-	int t, n, m;
+	int t, n;
 	cin >> t;
 	while (t--) {
-		cin >> n >> m;
-		vector<int> a(n), sorted_a;
-		for (auto& x : a) cin >> x, sorted_a.emplace_back(x);
-		sort(sorted_a.begin(), sorted_a.end());
-		int ss = 0, place = 0;
+		cin >> n;
+		int odd = 0, even = 0, x;
 		for (int i = 0; i < n; i++) {
-			if (ss + sorted_a[i] <= m) {
-				place++;
-				ss += sorted_a[i];
-			}
-			else break;
+			cin >> x;
+			if (x & 1) odd++;
+			else even++;
 		}
-		if (place > 0 && place < n && ss - sorted_a[place - 1] + a[place] <= m)
-			place++;
-		cout << n - place + 1 << "\n";
+		auto dp = vector<vector<vector<vector<int>>>>(
+		  odd + 1,
+		  vector<vector<vector<int>>>(
+			even + 1, vector<vector<int>>(2, vector<int>(2, -1))));
+		if (chaewon(odd, even, 0, 0, dp) == 0)
+			cout << "Alice\n";
+		else cout << "Bob\n";
 	}
 	return 0;
 }
