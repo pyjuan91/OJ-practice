@@ -1,3 +1,0 @@
-/home/poyu/Desktop/OJ-practice/CSES/Intro/1068/cmake-build-debug/CMakeFiles/1068.dir
-/home/poyu/Desktop/OJ-practice/CSES/Intro/1068/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/poyu/Desktop/OJ-practice/CSES/Intro/1068/cmake-build-debug/CMakeFiles/rebuild_cache.dir
