@@ -1,29 +1,28 @@
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;
-const int mod = 1e9 + 7;
-int n, m, a, b;
-vector<int> g[100005], dp(100005, -1);
-void chaewon(int x) {
-	if (x == n) {
-		dp[x] = 1;
-		return;
-	}
-	if (dp[x] != -1) return;
-	dp[x] = 0;
-	for (auto i : g[x]) {
-		chaewon(i);
-		dp[x] = (dp[x] + dp[i]) % mod;
-	}
-}
+
+const int maxn = 2e5 + 5;
+int n, q, dp[maxn][32], x, k;
+
 int32_t main() {
 	cin.tie(nullptr)->sync_with_stdio(false);
-	cin >> n >> m;
-	while (m--) {
-		cin >> a >> b;
-		g[a].push_back(b);
+
+	cin >> n >> q;
+	for (int i = 1; i <= n; i++) cin >> dp[i][0];
+
+	for (int bi_jump = 1; bi_jump < 32; bi_jump++) {
+		for (int node = 1; node <= n; node++) {
+			dp[node][bi_jump] = dp[dp[node][bi_jump - 1]][bi_jump - 1];
+		}
 	}
-	chaewon(1);
-	cout << dp[1] << '\n';
+
+	while (q--) {
+		cin >> x >> k;
+		for (int bi_jump = 0; bi_jump < 32; bi_jump++) {
+			if (k & (1 << bi_jump)) x = dp[x][bi_jump];
+		}
+		cout << x << '\n';
+	}
 	return 0;
 }
