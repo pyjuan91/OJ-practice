@@ -11,7 +11,7 @@ void init() {
       lp[i] = i;
       pr.push_back(i);
     }
-    for (int j = 0; i * pr[j] <= N; ++j) {
+    for (int j = 0; i * pr[j] <= kMax; ++j) {
       lp[i * pr[j]] = pr[j];
       if (pr[j] == lp[i]) {
         break;
