@@ -2,11 +2,11 @@
 #include <cassert>
 #include <vector>
 
-struct dsu {
+struct DisjointSetUnion {
 	public:
-		dsu()
+		DisjointSetUnion()
 		  : _n(0) {}
-		explicit dsu(int n)
+		explicit DisjointSetUnion(int n)
 		  : _n(n)
 		  , parent_or_size(n, -1) {}
 
