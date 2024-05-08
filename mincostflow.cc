@@ -40,10 +40,10 @@ struct csr {
 }  // namespace internal
 
 template <class Cap, class Cost>
-struct mcf_graph {
+struct MinCostFlowGraph {
  public:
-  mcf_graph() {}
-  explicit mcf_graph(int n) : _n(n) {}
+  MinCostFlowGraph() {}
+  explicit MinCostFlowGraph(int n) : _n(n) {}
 
   int add_edge(int from, int to, Cap cap, Cost cost) {
     assert(0 <= from && from < _n);
