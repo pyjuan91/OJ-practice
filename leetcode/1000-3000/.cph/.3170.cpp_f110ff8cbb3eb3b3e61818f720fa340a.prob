@@ -1,1 +1,0 @@
-{"name":"Local: 3170","url":"/Users/pyjuan91/Programs/OJ-practice/leetcode/1000-3000/3170.cpp","tests":[{"id":1717325585373,"input":"aaba*","output":"aab"},{"id":1717325596423,"input":"abc","output":"abc"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pyjuan91/Programs/OJ-practice/leetcode/1000-3000/3170.cpp","group":"local","local":true}
