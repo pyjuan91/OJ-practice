@@ -1,24 +1,18 @@
 #include <bits/stdc++.h>
+#include <debug.cc>
 using namespace std;
 
 class Solution {
 public:
   string answerString(string word, int numFriends) {
-    string res = "";
-
     if (numFriends == 1) return word;
-    auto lexico_larger_one = [&](const string& a, const string& b) {
-      for (int i = 0; i < min(a.size(), b.size()); i++) {
-        if (a[i] > b[i]) return a;
-        if (a[i] < b[i]) return b;
-      };
-      return a.size() > b.size() ? a : b;
-      };
-
-    int n = word.size(), max_len = n - numFriends + 1;
+    string res = "";
+    int n = word.size();
+    int ideal_len = n - numFriends + 1;
     for (int i = 0; i < n; i++) {
-      string cur = word.substr(i, i + max_len > n ? n - i : max_len);
-      res = lexico_larger_one(res, cur);
+      if (!res.empty() and word[i] < res[0]) continue;
+      int len = min(ideal_len, n - i);
+      res = max(res, word.substr(i, len));
     }
     return res;
   }
