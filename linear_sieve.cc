@@ -5,7 +5,7 @@ const int kMax = 1e7 + 5;
 vector<int> lp(kMax + 1);
 vector<int> pr;
 
-void init() {
+int init = []() {
   for (int i = 2; i <= kMax; ++i) {
     if (lp[i] == 0) {
       lp[i] = i;
@@ -18,4 +18,5 @@ void init() {
       }
     }
   }
-}
+  return 0;
+  }();
