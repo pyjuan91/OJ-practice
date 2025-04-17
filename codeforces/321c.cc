@@ -1,48 +1,53 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-const int kMax = 1e5 + 5;
-int n, u, v, sz[kMax], res[kMax];
-vector<int> g[kMax];
-bool vis[kMax];
-
-void tree_resize(int u, int p) {
-  sz[u] = 1;
-  for (int v : g[u]) {
-    if (v == p || vis[v]) continue;
-    tree_resize(v, u);
-    sz[u] += sz[v];
-  }
-}
-
-int get_centroid(int u, int p, int n) {
-  for (int v : g[u]) {
-    if (v == p || vis[v]) continue;
-    if (sz[v] > n / 2) return get_centroid(v, u, n);
-  }
-  return u;
-}
-
-void chaewon(int u, int d) {
-  tree_resize(u, 0);
-  int c = get_centroid(u, 0, sz[u]);
-  vis[c] = true;
-  res[c] = d;
-  for (int v : g[c]) {
-    if (vis[v]) continue;
-    chaewon(v, d + 1);
-  }
-}
-
-int main() {
+int32_t main() {
   cin.tie(nullptr)->sync_with_stdio(false);
+
+  int n;
   cin >> n;
+
+  vector<vector<int>> g(n);
   for (int i = 1; i < n; i++) {
+    int u, v;
     cin >> u >> v;
+    u--, v--;
     g[u].push_back(v);
     g[v].push_back(u);
   }
-  chaewon(1, 0);
-  for (int i = 1; i <= n; i++) cout << (char)('A' + res[i]) << ' ';
+
+  vector<bool> visited(n);
+  vector<int> subtree_size(n);
+  auto compute_subtree_size = [&](auto&& self, int u, int p) -> void {
+    subtree_size[u] = 1;
+    for (int v : g[u]) {
+      if (v == p or visited[v]) continue;
+      self(self, v, u);
+      subtree_size[u] += subtree_size[v];
+    }
+    };
+
+  auto find_centroid = [&](auto&& self, int u, int p, int tot_size) -> int {
+    for (int v : g[u]) {
+      if (v == p or visited[v]) continue;
+      if (subtree_size[v] * 2 > tot_size) return self(self, v, u, tot_size);
+    }
+    return u;
+    };
+
+  vector<int> res(n);
+  auto decompose = [&](auto&& self, int u, int depth) -> void {
+    compute_subtree_size(compute_subtree_size, u, -1);
+    int centroid = find_centroid(find_centroid, u, -1, subtree_size[u]);
+    visited[centroid] = true;
+    res[centroid] = depth;
+    for (int v : g[centroid]) {
+      if (visited[v]) continue;
+      self(self, v, depth + 1);
+    }
+    };
+
+  decompose(decompose, 0, 0);
+  for (auto& c : res) cout << static_cast<char>(c + 'A') << ' ';
+  cout << '\n';
   return 0;
 }
