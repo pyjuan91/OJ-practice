@@ -1,9 +1,10 @@
 #ifndef ATCODER_FENWICKTREE_HPP
 #define ATCODER_FENWICKTREE_HPP 1
 
-#include <atcoder/internal_type_traits>
 #include <cassert>
 #include <vector>
+
+#include "atcoder/internal_type_traits"
 
 namespace atcoder {
 
@@ -13,7 +14,7 @@ template <class T> struct fenwick_tree {
 
   public:
     fenwick_tree() : _n(0) {}
-    fenwick_tree(int n) : _n(n), data(n) {}
+    explicit fenwick_tree(int n) : _n(n), data(n) {}
 
     void add(int p, T x) {
         assert(0 <= p && p < _n);

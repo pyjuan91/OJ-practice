@@ -14,7 +14,7 @@ namespace atcoder {
 struct dsu {
   public:
     dsu() : _n(0) {}
-    dsu(int n) : _n(n), parent_or_size(n, -1) {}
+    explicit dsu(int n) : _n(n), parent_or_size(n, -1) {}
 
     int merge(int a, int b) {
         assert(0 <= a && a < _n);
@@ -35,8 +35,7 @@ struct dsu {
 
     int leader(int a) {
         assert(0 <= a && a < _n);
-        if (parent_or_size[a] < 0) return a;
-        return parent_or_size[a] = leader(parent_or_size[a]);
+        return _leader(a);
     }
 
     int size(int a) {
@@ -69,6 +68,11 @@ struct dsu {
     // root node: -1 * component size
     // otherwise: parent
     std::vector<int> parent_or_size;
+
+    int _leader(int a) {
+        if (parent_or_size[a] < 0) return a;
+        return parent_or_size[a] = _leader(parent_or_size[a]);
+    }
 };
 
 }  // namespace atcoder

@@ -2,16 +2,17 @@
 #define ATCODER_SCC_HPP 1
 
 #include <algorithm>
-#include <atcoder/internal_scc>
 #include <cassert>
 #include <vector>
+
+#include "atcoder/internal_scc"
 
 namespace atcoder {
 
 struct scc_graph {
   public:
     scc_graph() : internal(0) {}
-    scc_graph(int n) : internal(n) {}
+    explicit scc_graph(int n) : internal(n) {}
 
     void add_edge(int from, int to) {
         int n = internal.num_vertices();

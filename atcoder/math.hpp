@@ -5,7 +5,8 @@
 #include <cassert>
 #include <tuple>
 #include <vector>
-#include <atcoder/internal_math>
+
+#include "atcoder/internal_math"
 
 namespace atcoder {
 
@@ -53,7 +54,7 @@ std::pair<long long, long long> crt(const std::vector<long long>& r,
         // r2 % m0 = r0
         // r2 % m1 = r1
         // -> (r0 + x*m0) % m1 = r1
-        // -> x*u0*g % (u1*g) = (r1 - r0) (u0*g = m0, u1*g = m1)
+        // -> x*u0*g = r1-r0 (mod u1*g) (u0*g = m0, u1*g = m1)
         // -> x = (r1 - r0) / g * inv(u0) (mod u1)
 
         // im = inv(u0) (mod u1) (0 <= im < u1)
@@ -79,21 +80,20 @@ std::pair<long long, long long> crt(const std::vector<long long>& r,
 }
 
 long long floor_sum(long long n, long long m, long long a, long long b) {
-    long long ans = 0;
-    if (a >= m) {
-        ans += (n - 1) * n * (a / m) / 2;
-        a %= m;
+    assert(0 <= n && n < (1LL << 32));
+    assert(1 <= m && m < (1LL << 32));
+    unsigned long long ans = 0;
+    if (a < 0) {
+        unsigned long long a2 = internal::safe_mod(a, m);
+        ans -= 1ULL * n * (n - 1) / 2 * ((a2 - a) / m);
+        a = a2;
     }
-    if (b >= m) {
-        ans += n * (b / m);
-        b %= m;
+    if (b < 0) {
+        unsigned long long b2 = internal::safe_mod(b, m);
+        ans -= 1ULL * n * ((b2 - b) / m);
+        b = b2;
     }
-
-    long long y_max = (a * n + b) / m, x_max = (y_max * m - b);
-    if (y_max == 0) return ans;
-    ans += (n - (x_max + a - 1) / a) * y_max;
-    ans += floor_sum(y_max, a, m, (a - x_max % a) % a);
-    return ans;
+    return ans + internal::floor_sum_unsigned(n, m, a, b);
 }
 
 }  // namespace atcoder
