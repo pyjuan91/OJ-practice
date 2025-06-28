@@ -2,8 +2,8 @@
 using namespace std;
 class Solution
 {
-  public:
-    int lastStoneWeightII(vector<int> &stones)
+public:
+    int lastStoneWeightII(vector<int>& stones)
     {
         // [a, b, c, d] -> [a, b, (d-c)] -> [(b-d+c), a] -> [(b-d+c-a)];
         int sum = accumulate(stones.begin(), stones.end(), 0);
