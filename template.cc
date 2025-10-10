@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #include "./debug.cc"
 #else
 #define debug(...)
