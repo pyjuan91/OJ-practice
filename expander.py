@@ -11,7 +11,7 @@ from typing import List
 
 logger = getLogger(__name__)  # type: Logger
 
-atcoder_include = re.compile('#include\s*["<](atcoder/[a-z_]*(|.hpp))[">]\s*')
+atcoder_include = re.compile(r'#include\s*["<](atcoder/[a-z_]*(|.hpp))[">]\s*')
 
 include_guard = re.compile('#.*ATCODER_[A-Z_]*_HPP')
 
