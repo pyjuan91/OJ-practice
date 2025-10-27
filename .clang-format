@@ -1,43 +1,61 @@
----
-Language: Cpp
-BasedOnStyle: Microsoft
 AccessModifierOffset: -4
+AlignAfterOpenBracket: BlockIndent
+AlignArrayOfStructures: Left
+AlignConsecutiveBitFields: Consecutive
 AlignEscapedNewlines: Left
-AlignTrailingComments: false
-AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortFunctionsOnASingleLine: All
-AlwaysBreakTemplateDeclarations: Yes
+AlignOperands: false
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortFunctionsOnASingleLine: true
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortLambdasOnASingleLine: true
+AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakTemplateDeclarations: MultiLine
 BinPackArguments: false
 BinPackParameters: false
-BraceWrapping:
-  AfterCaseLabel: true
-  AfterUnion: true
-  AfterExternBlock: false
+BreakAfterAttributes: Leave
+BreakBeforeBraces: Attach
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializers: AfterColon
-BreakInheritanceList: AfterColon
-ColumnLimit: 0
-CommentPragmas: "suppress"
+BreakInheritanceList: BeforeComma
+BreakStringLiterals: false
+ColumnLimit: 140
+CompactNamespaces: true
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
-Cpp11BracedListStyle: false
-FixNamespaceComments: false
-IncludeBlocks: Regroup
-IncludeCategories:
-    - Regex: '^.*(precomp|pch|stdafx)'
-      Priority: -1
-    - Regex: '^".*"'
-      Priority: 1
-    - Regex: '^<.*>'
-      Priority: 2
-    - Regex: '.*'
-      Priority: 3
-KeepEmptyLinesAtTheStartOfBlocks: false
-MacroBlockBegin: "BEGIN_TEST_METHOD_PROPERTIES|BEGIN_MODULE|BEGIN_TEST_CLASS|BEGIN_TEST_METHOD"
-MacroBlockEnd: "END_TEST_METHOD_PROPERTIES|END_MODULE|END_TEST_CLASS|END_TEST_METHOD"
-NamespaceIndentation: All
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: true
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Always
+IncludeBlocks: Preserve
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
+IndentWidth: 4
+IndentWrappedFunctionNames: true
+InsertBraces: true
+InsertNewlineAtEOF: true
+InsertTrailingCommas: Wrapped
+MaxEmptyLinesToKeep: 1
+PackConstructorInitializers: NextLine
+PenaltyBreakAssignment: 65
+PenaltyBreakBeforeFirstCallParameter: 16
+PenaltyBreakComment: 320
+PenaltyBreakFirstLessLess: 50
+PenaltyBreakString: 0
+PenaltyExcessCharacter: 10
+PenaltyReturnTypeOnItsOwnLine: 100
 PointerAlignment: Left
-ReflowComments: false
-SortIncludes: false
-SpaceAfterTemplateKeyword: false
-SpacesInAngles: false
-SpacesInContainerLiterals: false
+QualifierAlignment: Left
+ReferenceAlignment: Left
+SortIncludes: CaseSensitive
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+SpaceAroundPointerQualifiers: Both
+SpaceBeforeParens: ControlStatementsExceptForEachMacros
+SpacesInAngles: Never
+TabWidth: 4
+UseCRLF: false
+UseTab: AlignWithSpaces
