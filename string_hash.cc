@@ -19,7 +19,7 @@ class HashedString {
 
  public:
   HashedString(const string &s) : p_hash(s.size() + 1) {
-    while (pow.size() < s.size()) {
+    while (pow.size() <= s.size()) {
       pow.push_back(mod_mul(pow.back(), B));
     }
     p_hash[0] = 0;
