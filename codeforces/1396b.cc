@@ -1,31 +1,31 @@
 #include <bits/stdc++.h>
+#ifdef LOCAL
+#include "./debug.cc"
+#else
+#define debug(...)
+#define debugArr(...)
+#endif
 #define int long long
 using namespace std;
+
+string patty(int n, vector<int>& a) {
+  int sum = accumulate(a.begin(), a.end(), 0);
+  for (const auto& x : a) {
+    if (x > sum / 2) return "T";
+  }
+  if (sum % 2 == 0) return "HL";
+  return "T";
+}
+
 int32_t main() {
-	cin.tie(nullptr)->sync_with_stdio(false);
-	int tt, n, x, t, hl;
-	priority_queue<int> pq;
-	cin >> tt;
-	while (tt--) {
-		cin >> n;
-		while (n--) {
-			cin >> x;
-			pq.emplace(x);
-		}
-		while (!pq.empty()) {
-			t = pq.top();
-			pq.pop();
-			if (pq.empty()) {
-				cout << "T\n";
-				goto chaewon;
-			}
-			hl = pq.top();
-			pq.pop();
-			if (t > 1) pq.emplace(t - 1);
-			if (hl > 1) pq.emplace(hl - 1);
-		}
-		cout << "HL\n";
-	chaewon:;
-	}
-	return 0;
+  cin.tie(nullptr)->sync_with_stdio(false);
+  int t, n;
+  cin >> t;
+  while (t--) {
+    cin >> n;
+    vector<int> a(n);
+    for (auto& x : a) cin >> x;
+    cout << patty(n, a) << "\n";
+  }
+  return 0;
 }
