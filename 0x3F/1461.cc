@@ -17,7 +17,7 @@ class HashedString {
   int64_t mod_mul(int64_t a, int64_t b) { return mul(a, b) % M; }
 
  public:
-  HashedString(const string &s) : p_hash(s.size() + 1) {
+  HashedString(const string& s) : p_hash(s.size() + 1) {
     while (pow.size() <= s.size()) {
       pow.push_back(mod_mul(pow.back(), B));
     }
@@ -38,3 +38,17 @@ mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 vector<int64_t> HashedString::pow = {1};
 const int64_t HashedString::B =
     uniform_int_distribution<int64_t>(0, M - 1)(rng);
+
+class Solution {
+ public:
+  bool hasAllCodes(string s, int k) {
+    auto hs = HashedString(s);
+    unordered_set<int64_t> us;
+    for (int i = k - 1; i < s.size(); i++) {
+      us.insert(hs.get_hash(i - k + 1, i));
+    }
+    return us.size() == (1 << k);
+  }
+};
+
+int main() { return 0; }
